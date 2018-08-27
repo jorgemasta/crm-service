@@ -1,0 +1,19 @@
+{
+  "name": "crm-service",
+  "version": "1.0.0",
+  "description": "REST API to manage customer data for a small shop.",
+  "main": "index.js",
+  "author": "Jorge Marrero",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.10",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.18.3"
+  }
+}
