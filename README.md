@@ -59,7 +59,7 @@ REST API to manage customer data for a small shop.
 
 This project has been developed with the following versions:
 
-- v9.4.0 NodeJS
+- v9.10.0 NodeJS
 - v4.0.1 mongodb
 
 ### Installing NodeJS
