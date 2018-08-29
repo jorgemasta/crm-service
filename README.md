@@ -83,7 +83,7 @@ With `yarn start` or `npm run start` you can start a server in your machine.
 
 ## Deployment
 
-_TODO_
+You can deploy the project to https://crm-service-nkjrlocled.now.sh/ with `yarn deploy` or `npm run deploy`.
 
 ## Authors
 
