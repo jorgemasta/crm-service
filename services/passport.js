@@ -1,7 +1,9 @@
 const passport = require("passport");
+const { Strategy: JwtStrategy, ExtractJwt } = require("passport-jwt");
 const LocalStrategy = require("passport-local");
 
 const User = require("../models/user");
+const { JWT_SECRET } = process.env;
 
 // Local Strategy
 const localOptions = {
@@ -20,5 +22,22 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
   });
 });
 
+// JWT Strategy
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromHeader("authorization"),
+  secretOrKey: JWT_SECRET
+};
+const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
+  User.findById(payload.sub, (err, user) => {
+    if (err) return done(err, false);
+    if (user) {
+      done(null, user);
+    } else {
+      done(null, false);
+    }
+  });
+});
+
 // Tell passport to use this strategy
+passport.use(jwtLogin);
 passport.use(localLogin);
