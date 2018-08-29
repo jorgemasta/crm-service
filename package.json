@@ -6,7 +6,8 @@
   "author": "Jorge Marrero",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "deploy": "now --dotenv=.env.production"
   },
   "engines": {
     "node": ">=9.10.0"
