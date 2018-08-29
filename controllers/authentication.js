@@ -15,9 +15,14 @@ function tokenForUser(user) {
   );
 }
 
+module.exports.login = (req, res) => {
+  // User has already had their email and password auth'd
+  // We just need to give them a token
+  res.send({ token: tokenForUser(req.user) });
+};
+
 module.exports.createUser = (req, res, next) => {
   const { email, password, role } = req.body;
-  // TODO: check if is a valid e-mail and password is more that 6, etc.
   if (!isValidEmail(email) || !isValidPassword(password)) {
     return res
       .status(422)

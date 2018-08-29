@@ -38,15 +38,15 @@ REST API to manage customer data for a small shop.
 
 ### Already implemented
 
-| Type | Route  | Description   | Fields                      | Permissions | Return |
-| ---- | ------ | ------------- | --------------------------- | ----------- | ------ |
-| POST | /users | Create a user | email*, password*, role = 1 | 2           |        |
+| Type | Route  | Description                | Fields                      | Permissions | Return    |
+| ---- | ------ | -------------------------- | --------------------------- | ----------- | --------- |
+| POST | /users | Create a user              | email*, password*, role = 1 | 2 (not yet) |           |
+| POST | /login | Allow user and admin login | email*, password*           | 0           | JWT Token |
 
 ### Needs to be implemented
 
 | Type   | Route                  | Description                   | Fields                     | Permissions | Return                                 |
 | ------ | ---------------------- | ----------------------------- | -------------------------- | ----------- | -------------------------------------- |
-| POST   | /login                 | Allow user and admin login    | email*, password*          | 0           | JWT Token                              |
 | POST   | /customers             | Create a customer             | name*, surname*, id, photo | 1           |                                        |
 | PUT    | /users/:userId         | Update a user                 | email, password, role      | 2           |                                        |
 | PUT    | /customers/:customerId | Update a customer             | name, surname, photo       | 1           |                                        |
