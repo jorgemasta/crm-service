@@ -40,7 +40,7 @@ REST API to manage customer data for a small shop.
 
 | Type | Route  | Description                | Fields                      | Permissions | Return    |
 | ---- | ------ | -------------------------- | --------------------------- | ----------- | --------- |
-| POST | /users | Create a user              | email*, password*, role = 1 | 2 (not yet) |           |
+| POST | /users | Create a user              | email*, password*, role = 1 | 2           |           |
 | POST | /login | Allow user and admin login | email*, password*           | 0           | JWT Token |
 
 ### Needs to be implemented
