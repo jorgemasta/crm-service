@@ -1,10 +1,12 @@
 const passport = require("passport");
 
-require("./services/passport");
+require("../services/passport");
 
-const Authentication = require("./controllers/authentication");
-const { allowOnly } = require("./helpers/routesHelper");
-const config = require("./config");
+const Authentication = require("../controllers/authentication");
+const Users = require("../controllers/users");
+
+const { allowOnly } = require("../helpers/routesHelper");
+const roles = require("./roles");
 
 const requireSignin = passport.authenticate("local", { session: false });
 const requireAuth = passport.authenticate("jwt", { session: false });
@@ -14,6 +16,6 @@ module.exports = app => {
   app.post(
     "/users",
     requireAuth,
-    allowOnly(config.userRoles.admin, Authentication.createUser)
+    allowOnly(roles.userRoles.admin, Users.createUser)
   );
 };

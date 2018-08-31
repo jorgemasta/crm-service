@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 
-const router = require("./router");
+const router = require("./config/router");
 const { DB_HOST, DB_PORT, DB_NAME, SERVER_PORT } = process.env;
 const app = express();
 
