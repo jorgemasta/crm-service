@@ -77,5 +77,8 @@ typings/
 # Serverless directories
 .serverless
 
+## uplods
+/uploads
+
 
 # End of https://www.gitignore.io/api/node

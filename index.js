@@ -5,9 +5,10 @@ const http = require("http");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const mkdirp = require("mkdirp");
 
 const router = require("./config/router");
-const { DB_HOST, DB_PORT, DB_NAME, SERVER_PORT } = process.env;
+const { DB_HOST, DB_PORT, DB_NAME, SERVER_PORT, UPLOAD_PATH } = process.env;
 const app = express();
 
 // DB Setup
@@ -17,9 +18,14 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 
+// Prepare File Storage Folder
+mkdirp.sync(UPLOAD_PATH);
+
 // App Setup
 app.use(morgan("combined"));
-app.use(bodyParser.json({ type: "*/*" }));
+app.use("/uploads", express.static("uploads"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 router(app);
 
 // Server Setup
