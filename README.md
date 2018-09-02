@@ -38,23 +38,23 @@ REST API to manage customer data for a small shop.
 
 ### Already implemented
 
-| Type | Route  | Description                | Fields                      | Permissions | Return    |
-| ---- | ------ | -------------------------- | --------------------------- | ----------- | --------- |
-| POST | /users | Create a user              | email*, password*, role = 1 | 2           |           |
-| POST | /login | Allow user and admin login | email*, password*           | 0           | JWT Token |
+| Type | Route      | Description                | Fields                      | Permissions | Return    |
+| ---- | ---------- | -------------------------- | --------------------------- | ----------- | --------- |
+| POST | /users     | Create a user              | email*, password*, role = 1 | 2           |           |
+| POST | /login     | Allow user and admin login | email*, password*           | 0           | JWT Token |
+| POST | /customers | Create a customer          | name*, surname*, id, photo  | 1           |           |
 
 ### Needs to be implemented
 
-| Type   | Route                  | Description                   | Fields                     | Permissions | Return                                 |
-| ------ | ---------------------- | ----------------------------- | -------------------------- | ----------- | -------------------------------------- |
-| POST   | /customers             | Create a customer             | name*, surname*, id, photo | 1           |                                        |
-| PUT    | /users/:userId         | Update a user                 | email, password, role      | 2           |                                        |
-| PUT    | /customers/:customerId | Update a customer             | name, surname, photo       | 1           |                                        |
-| DELETE | /users/:userId         | Delete a user                 |                            | 2           |                                        |
-| DELETE | /customers/:customerId | Delete a customer             |                            | 1           |                                        |
-| GET    | /users                 | List all users                |                            | 2           | All users (email and id)               |
-| GET    | /customers             | List all customers            |                            | 1           | All customers (name, surname and id)   |
-| GET    | /customers/:customerId | Get full customer information |                            | 1           | Customer (name, surname, id and photo) |
+| Type   | Route                  | Description                   | Fields                | Permissions | Return                                 |
+| ------ | ---------------------- | ----------------------------- | --------------------- | ----------- | -------------------------------------- |
+| PUT    | /users/:userId         | Update a user                 | email, password, role | 2           |                                        |
+| PUT    | /customers/:customerId | Update a customer             | name, surname, photo  | 1           |                                        |
+| DELETE | /users/:userId         | Delete a user                 |                       | 2           |                                        |
+| DELETE | /customers/:customerId | Delete a customer             |                       | 1           |                                        |
+| GET    | /users                 | List all users                |                       | 2           | All users (email and id)               |
+| GET    | /customers             | List all customers            |                       | 1           | All customers (name, surname and id)   |
+| GET    | /customers/:customerId | Get full customer information |                       | 1           | Customer (name, surname, id and photo) |
 
 ## Getting Started
 
