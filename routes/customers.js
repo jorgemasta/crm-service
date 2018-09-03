@@ -15,10 +15,20 @@ router.post(
   upload.single("photo"),
   allowOnly(accessLevels.user, Customers.createCustomer)
 );
+router.get(
+  "/",
+  requireAuth,
+  allowOnly(accessLevels.user, Customers.getCustomers)
+);
 router.put(
   "/:customerId",
   requireAuth,
   upload.single("photo"),
   allowOnly(accessLevels.user, Customers.updateCustomer)
+);
+router.delete(
+  "/:customerId",
+  requireAuth,
+  allowOnly(accessLevels.user, Customers.deleteCustomer)
 );
 module.exports = router;

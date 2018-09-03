@@ -27,6 +27,18 @@ module.exports.createCustomer = (req, res, next) => {
   });
 };
 
+module.exports.getCustomers = (req, res, next) => {
+  Customer.find({}, (err, docs) => {
+    if (err) next(err);
+    const customers = docs.map(({ name, surname, id }) => ({
+      name,
+      surname,
+      id
+    }));
+    res.json(customers);
+  });
+};
+
 module.exports.updateCustomer = (req, res, next) => {
   const {
     user: { id: userId },
@@ -46,6 +58,16 @@ module.exports.updateCustomer = (req, res, next) => {
     res.json({
       message: "Customer updated",
       updatedCustomer
+    });
+  });
+};
+
+module.exports.deleteCustomer = (req, res, next) => {
+  const { customerId: _id } = req.params;
+  Customer.deleteOne({ _id }, err => {
+    if (err) next(err);
+    res.json({
+      message: "Customer deleted"
     });
   });
 };

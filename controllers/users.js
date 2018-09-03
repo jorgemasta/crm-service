@@ -31,6 +31,14 @@ module.exports.createUser = (req, res, next) => {
   });
 };
 
+module.exports.getUsers = (req, res, next) => {
+  User.find({}, (err, docs) => {
+    if (err) next(err);
+    const users = docs.map(({ role, email, id }) => ({ role, email, id }));
+    res.json(users);
+  });
+};
+
 module.exports.updateUser = (req, res, next) => {
   const {
     body: { email, password, role },
@@ -48,6 +56,16 @@ module.exports.updateUser = (req, res, next) => {
     if (err) next(err);
     res.json({
       message: "User updated"
+    });
+  });
+};
+
+module.exports.deleteUser = (req, res, next) => {
+  const { userId: _id } = req.params;
+  User.deleteOne({ _id }, err => {
+    if (err) next(err);
+    res.json({
+      message: "User deleted"
     });
   });
 };
