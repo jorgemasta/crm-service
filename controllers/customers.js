@@ -26,3 +26,26 @@ module.exports.createCustomer = (req, res, next) => {
     res.json({ id: customer.id });
   });
 };
+
+module.exports.updateCustomer = (req, res, next) => {
+  const {
+    user: { id: userId },
+    body,
+    file,
+    params: { customerId: _id }
+  } = req;
+
+  const updatedCustomer = {
+    ...body,
+    lastModifiedBy: userId
+  };
+  if (file && file.path) updatedCustomer.photo = file.path;
+
+  Customer.updateOne({ _id }, updatedCustomer, err => {
+    if (err) next(err);
+    res.json({
+      message: "Customer updated",
+      updatedCustomer
+    });
+  });
+};
