@@ -20,6 +20,11 @@ router.get(
   requireAuth,
   allowOnly(accessLevels.user, Customers.getCustomers)
 );
+router.get(
+  "/:customerId",
+  requireAuth,
+  allowOnly(accessLevels.user, Customers.getSingleCustomer)
+);
 router.put(
   "/:customerId",
   requireAuth,

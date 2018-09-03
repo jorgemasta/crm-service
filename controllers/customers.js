@@ -39,6 +39,23 @@ module.exports.getCustomers = (req, res, next) => {
   });
 };
 
+module.exports.getSingleCustomer = (req, res, next) => {
+  const { customerId: _id } = req.params;
+
+  Customer.findById(_id, (err, doc) => {
+    if (err) next(err);
+    const customer = {
+      id: doc.id,
+      name: doc.name,
+      surname: doc.surname,
+      createdBy: doc.createdBy,
+      lastModifiedBy: doc.lastModifiedBy,
+      photo: doc.photo
+    };
+    res.json(customer);
+  });
+};
+
 module.exports.updateCustomer = (req, res, next) => {
   const {
     user: { id: userId },
