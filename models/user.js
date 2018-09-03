@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 
+const hashPassword = require("../helpers/hashPassword");
+
 // Define our model
 const userSchema = new Schema({
   email: {
@@ -25,26 +27,23 @@ const userSchema = new Schema({
 });
 
 // On Save Hook, encrypt password
-userSchema.pre("save", function(next) {
+userSchema.pre("save", async function(next) {
   const user = this;
 
-  // generate a salt then run callback
-  bcrypt.genSalt(10, function(err, salt) {
-    if (err) {
-      return next(err);
-    }
+  const hashedPassword = await hashPassword(user.password);
+  user.password = hashedPassword;
 
-    // hash (encrypt) the password using the salt
-    bcrypt.hash(user.password, salt, function(err, hash) {
-      if (err) {
-        return next(err);
-      }
+  return next();
+});
 
-      // overwrite plain text password with encrypted password
-      user.password = hash;
-      next();
-    });
-  });
+// On UpdateOne Hook, encrypt password
+userSchema.pre("updateOne", async function(next) {
+  const user = this;
+
+  const hashedPassword = await hashPassword(user._update.password);
+  user._update.password = hashedPassword;
+
+  return next();
 });
 
 userSchema.methods.comparePassword = function(candidatePassword, callback) {

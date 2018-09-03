@@ -9,5 +9,10 @@ const router = express.Router();
 const requireAuth = passport.authenticate("jwt", { session: false });
 
 router.post("/", requireAuth, allowOnly(accessLevels.admin, Users.createUser));
+router.put(
+  "/:userId",
+  requireAuth,
+  allowOnly(accessLevels.admin, Users.updateUser)
+);
 
 module.exports = router;

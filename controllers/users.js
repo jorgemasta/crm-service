@@ -30,3 +30,24 @@ module.exports.createUser = (req, res, next) => {
     });
   });
 };
+
+module.exports.updateUser = (req, res, next) => {
+  const {
+    body: { email, password, role },
+    params
+  } = req;
+
+  if (!isValidEmail(email) || !isValidPassword(password)) {
+    return res
+      .status(422)
+      .send({ error: "You must provide valid email and password." });
+  }
+
+  const user = { email, password, role };
+  User.updateOne({ _id: params.userId }, user, err => {
+    if (err) next(err);
+    res.json({
+      message: "User updated"
+    });
+  });
+};
