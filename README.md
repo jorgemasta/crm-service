@@ -38,52 +38,59 @@ REST API to manage customer data for a small shop.
 
 ### Already implemented
 
-| Type | Route      | Description                | Fields                      | Permissions | Return    |
-| ---- | ---------- | -------------------------- | --------------------------- | ----------- | --------- |
-| POST | /users     | Create a user              | email*, password*, role = 1 | 2           |           |
-| POST | /login     | Allow user and admin login | email*, password*           | 0           | JWT Token |
-| POST | /customers | Create a customer          | name*, surname*, id, photo  | 1           |           |
+| Type   | Route                  | Description                   | Fields                      | Permissions | Return                                 |
+| ------ | ---------------------- | ----------------------------- | --------------------------- | ----------- | -------------------------------------- |
+| POST   | /users                 | Create a user                 | email*, password*, role = 1 | 2           |                                        |
+| POST   | /login                 | Allow user and admin login    | email*, password*           | 0           | JWT Token                              |
+| POST   | /customers             | Create a customer             | name*, surname*, id, photo  | 1           |                                        |
+| PUT    | /users/:userId         | Update a user                 | email, password, role       | 2           |                                        |
+| PUT    | /customers/:customerId | Update a customer             | name, surname, photo        | 1           |                                        |
+| DELETE | /users/:userId         | Delete a user                 |                             | 2           |                                        |
+| DELETE | /customers/:customerId | Delete a customer             |                             | 1           |                                        |
+| GET    | /users                 | List all users                |                             | 2           | All users (email and id)               |
+| GET    | /customers             | List all customers            |                             | 1           | All customers (name, surname and id)   |
+| GET    | /customers/:customerId | Get full customer information |                             | 1           | Customer (name, surname, id and photo) |
 
 ### Needs to be implemented
 
-| Type   | Route                  | Description                   | Fields                | Permissions | Return                                 |
-| ------ | ---------------------- | ----------------------------- | --------------------- | ----------- | -------------------------------------- |
-| PUT    | /users/:userId         | Update a user                 | email, password, role | 2           |                                        |
-| PUT    | /customers/:customerId | Update a customer             | name, surname, photo  | 1           |                                        |
-| DELETE | /users/:userId         | Delete a user                 |                       | 2           |                                        |
-| DELETE | /customers/:customerId | Delete a customer             |                       | 1           |                                        |
-| GET    | /users                 | List all users                |                       | 2           | All users (email and id)               |
-| GET    | /customers             | List all customers            |                       | 1           | All customers (name, surname and id)   |
-| GET    | /customers/:customerId | Get full customer information |                       | 1           | Customer (name, surname, id and photo) |
+| Type | Route | Description | Fields | Permissions | Return |
+| ---- | ----- | ----------- | ------ | ----------- | ------ |
+
 
 ## Getting Started
 
 ### Prerequisites
 
-This project has been developed with the following versions:
+- [Install NVM and use NodeJS +v9.10.0](https://github.com/creationix/nvm#installation)
+- Install MongoDB (see below)
+- [Install now](https://zeit.co/now#whats-now) _- just for deployment_
 
-- v9.10.0 NodeJS
-- v4.0.1 mongodb
+#### Installing MongoDB
 
-### Installing NodeJS
-
-_[Official Documentation](https://nodejs.org/)_
-
-### Installing MongoDB
-
+This project has been developed with `v4.0.1 mongodb`.
 _[macOS tutorial](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x)_
 
 We need to give permission to the data directory, in normal cases: `sudo chown -R $USER /data/db`.
 
 I recommend [Robo 3T](https://robomongo.org/) to work with MongoDB. Robo 3T is a native mongoDB management tool.
 
-### Running the project
+### Installing the project
+
+1. Clone the repo
+2. Run `yarn` or `npm install` to cover any dependencies.
+
+## Running the project
 
 With `yarn start` or `npm run start` you can start a server in your machine.
+You must also remember to have an open mongodb instance with `mongod`.
+
+## Running the tests
+
+No test at the moment!
 
 ## Deployment
 
-You can deploy the project to https://crm-service-nkjrlocled.now.sh/ with `yarn deploy` or `npm run deploy`.
+You can deploy the project to [zeit.co](https://zeit.co/) with `yarn deploy` or `npm run deploy`.
 
 ## Authors
 
