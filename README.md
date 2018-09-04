@@ -2,6 +2,8 @@
 
 REST API to manage customer data for a small shop.
 
+[API Documentation](https://documenter.getpostman.com/view/3433945/RWaC2XKn)
+
 ## Tech Stack
 
 ### Low-level request handling
@@ -12,7 +14,8 @@ REST API to manage customer data for a small shop.
 
 - **Express**: Parse response + routing
 - **BodyParser**: Help parse incoming HTTP request
-- **Morgan**: Login
+- **multer**: Help handling `multipart/form-data`, for uploading images
+- **Morgan**: Logging
 
 ### Database
 
@@ -40,16 +43,16 @@ REST API to manage customer data for a small shop.
 
 | Type   | Route                  | Description                   | Fields                      | Permissions | Return                                 |
 | ------ | ---------------------- | ----------------------------- | --------------------------- | ----------- | -------------------------------------- |
-| POST   | /users                 | Create a user                 | email*, password*, role = 1 | 2           |                                        |
 | POST   | /login                 | Allow user and admin login    | email*, password*           | 0           | JWT Token                              |
 | POST   | /customers             | Create a customer             | name*, surname*, id, photo  | 1           |                                        |
-| PUT    | /users/:userId         | Update a user                 | email, password, role       | 2           |                                        |
 | PUT    | /customers/:customerId | Update a customer             | name, surname, photo        | 1           |                                        |
-| DELETE | /users/:userId         | Delete a user                 |                             | 2           |                                        |
 | DELETE | /customers/:customerId | Delete a customer             |                             | 1           |                                        |
-| GET    | /users                 | List all users                |                             | 2           | All users (email and id)               |
 | GET    | /customers             | List all customers            |                             | 1           | All customers (name, surname and id)   |
 | GET    | /customers/:customerId | Get full customer information |                             | 1           | Customer (name, surname, id and photo) |
+| POST   | /users                 | Create a user                 | email*, password*, role = 1 | 2           |                                        |
+| PUT    | /users/:userId         | Update a user                 | email, password, role       | 2           |                                        |
+| DELETE | /users/:userId         | Delete a user                 |                             | 2           |                                        |
+| GET    | /users                 | List all users                |                             | 2           | All users (email and id)               |
 
 ### Needs to be implemented
 
@@ -78,6 +81,15 @@ I recommend [Robo 3T](https://robomongo.org/) to work with MongoDB. Robo 3T is a
 
 1. Clone the repo
 2. Run `yarn` or `npm install` to cover any dependencies.
+
+### Setting up the environment
+
+To run the project you must provide some environment variables in the root.
+
+- `.env`: to run the project locally
+- `.env.production`: to deploy the project
+
+_*NOTE:* You can follow `.env.example` to find out which variables are required._
 
 ## Running the project
 
