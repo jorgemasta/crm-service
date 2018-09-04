@@ -43,7 +43,12 @@ module.exports.getSingleCustomer = (req, res, next) => {
   const { customerId: _id } = req.params;
 
   Customer.findById(_id, (err, doc) => {
-    if (err) next(err);
+    if (err) {
+      if (err.name !== "CastError") next(err);
+      return res
+        .status(404)
+        .send({ message: "No customer with the provided ID." });
+    }
     const customer = {
       id: doc.id,
       name: doc.name,

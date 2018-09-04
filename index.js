@@ -8,7 +8,12 @@ const mongoose = require("mongoose");
 const mkdirp = require("mkdirp");
 
 const router = require("./config/router");
+
+const errorHandler = require("./helpers/errors/errorHandler");
+const logErrors = require("./helpers/errors/logErrors");
+
 const { DB_HOST, DB_PORT, DB_NAME, SERVER_PORT, UPLOAD_PATH } = process.env;
+
 const app = express();
 
 // DB Setup
@@ -27,6 +32,8 @@ app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 router(app);
+app.use(logErrors);
+app.use(errorHandler);
 
 // Server Setup
 const port = SERVER_PORT || 3090;
