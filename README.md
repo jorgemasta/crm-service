@@ -104,6 +104,12 @@ No test at the moment!
 
 You can deploy the project to [zeit.co](https://zeit.co/) with `yarn deploy` or `npm run deploy`.
 
+## Possible next improvements
+
+- [ ] **Delete unnecessary stored images:** Remove the previous stored image when updating a photo customer and prevent uploading an image if the request when creating or updating a customer fails.
+- [ ] **Pagination:** Pagination when all users or all customers are listed.
+- [ ] **Improve update/delete method response:** Check if a customer/user has been updated or deleted before sending a success message.
+
 ## Authors
 
 - **Jorge Marrero** - _Initial work_ - [jorgemarrero](https://github.com/jorgemarrero)
